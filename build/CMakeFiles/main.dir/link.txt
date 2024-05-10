@@ -1,0 +1,1 @@
+/usr/bin/clang -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/main.dir/src/algebra.o CMakeFiles/main.dir/src/main.o -o /Users/yolanda/Downloads/Xlab/sx_001-1/bin/main

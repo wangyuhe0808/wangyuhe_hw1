@@ -1,0 +1,3 @@
+/Users/yolanda/Downloads/Xlab/sx_001-1/build/CMakeFiles/main.dir
+/Users/yolanda/Downloads/Xlab/sx_001-1/build/CMakeFiles/edit_cache.dir
+/Users/yolanda/Downloads/Xlab/sx_001-1/build/CMakeFiles/rebuild_cache.dir

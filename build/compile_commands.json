@@ -1,0 +1,14 @@
+[
+{
+  "directory": "/Users/yolanda/Downloads/Xlab/sx_001-1/build",
+  "command": "/usr/bin/clang  -I/Users/yolanda/Downloads/Xlab/sx_001-1/inc -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -o CMakeFiles/main.dir/src/algebra.o -c /Users/yolanda/Downloads/Xlab/sx_001-1/src/algebra.c",
+  "file": "/Users/yolanda/Downloads/Xlab/sx_001-1/src/algebra.c",
+  "output": "CMakeFiles/main.dir/src/algebra.o"
+},
+{
+  "directory": "/Users/yolanda/Downloads/Xlab/sx_001-1/build",
+  "command": "/usr/bin/clang  -I/Users/yolanda/Downloads/Xlab/sx_001-1/inc -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -o CMakeFiles/main.dir/src/main.o -c /Users/yolanda/Downloads/Xlab/sx_001-1/src/main.c",
+  "file": "/Users/yolanda/Downloads/Xlab/sx_001-1/src/main.c",
+  "output": "CMakeFiles/main.dir/src/main.o"
+}
+]
