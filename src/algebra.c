@@ -93,7 +93,7 @@ Matrix transpose_matrix(Matrix a)
     return m;
 }
 
-Matrix cofactor_matrix(Matrix a, int row, int col)
+Matrix cofactor_matrix(Matrix a, int row, int col) // 计算代数余子式
 {
     Matrix m = create_matrix(a.cols - 1, a.rows - 1);
     for (int i = 0, ti = 0; i < a.rows - 1; i++)
@@ -127,9 +127,8 @@ double det_matrix(Matrix a)
         int sum = 0, n = 1;
         for (int j = 0; j < a.cols; j++)
         {
-            for (int a = 0; a < j + 1; a++)
-                n *= -1;
-            sum += n * a.data[1][j] * det_matrix(cofactor_matrix(a, 1, j));
+            int n = (j % 2 == 0) ? 1 : -1;
+            sum += n * a.data[0][j] * det_matrix(cofactor_matrix(a, 0, j));
         }
         return sum;
     }
@@ -137,30 +136,30 @@ double det_matrix(Matrix a)
 
 Matrix inv_matrix(Matrix a)
 {
-    if (a.rows != a.cols)
+    if (a.rows != a.cols && det_matrix(a) == 0)
     {
-        printf("Error: The matrix must be a square matrix.\n\n");
+        printf("Error: The matrix must be a square matrix.\n");
+        printf("Error: The matrix is singular.\n");
         return create_matrix(0, 0);
     }
-    else if (det_matrix(a) == 0)
+    else if (a.rows != a.cols)
     {
-        printf("Error: The matrix is singular.\n");
+        printf("Error: The matrix must be a square matrix.\n");
         return create_matrix(0, 0);
     }
     else
     {
-        int n = 1;
         Matrix m = create_matrix(a.rows, a.cols);
+        double det = det_matrix(a);
         for (int i = 0; i < a.rows; i++)
         {
             for (int j = 0; j < a.cols; j++)
             {
-                for (int k = 0; k < i + j; k++)
-                    n *= -1;
+                int n = ((i + j) % 2 == 0) ? 1 : -1;
                 m.data[i][j] = n * det_matrix(cofactor_matrix(a, j, i));
             }
         }
-        return scale_matrix(m, 1 / det_matrix(a));
+        return scale_matrix(m, 1.0 / det);
         ;
     }
 }
@@ -180,7 +179,7 @@ int rank_matrix(Matrix a)
                 }
             }
             if (fabs(a.data[max_row][col]) < 1e-10)
-                continue; // 交换最大元素所在的行到当前位置
+                continue;
             if (max_row != row)
             {
                 swap_rows(a, row, max_row);
