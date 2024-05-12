@@ -91,7 +91,10 @@ double trace_matrix(Matrix a);
  */
 void print_matrix(Matrix a);
 
-Matrix cofactor_matrix(Matrix a, int row, int col);
+double algebraic_cofactor(Matrix a, int c);
+int pow_(int a);
+double det_matrix(Matrix a);
+Matrix adjoint_matrix(Matrix a);
 Matrix swap_rows(Matrix a, int row1, int row2);
 
 #endif
