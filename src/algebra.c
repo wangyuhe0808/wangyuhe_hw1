@@ -93,42 +93,57 @@ Matrix transpose_matrix(Matrix a)
     return m;
 }
 
-Matrix cofactor_matrix(Matrix a, int row, int col) // 计算代数余子式
+double algebraic_cofactor(Matrix a, int c)
 {
-    Matrix m = create_matrix(a.cols - 1, a.rows - 1);
-    for (int i = 0, ti = 0; i < a.rows - 1; i++)
+    int m = a.rows - 1;
+    int q = 0;
+    Matrix n = create_matrix(m, m);
+    for (int i = 0; i < m; i++)
     {
-        if (i == row)
-            continue;
-        for (int j = 0, tj = 0; j < a.cols - 1; j++)
+        q = 0;
+        for (int j = 0; j < a.rows; j++)
         {
-            if (j == col)
+            if (j == c)
+            {
                 continue;
-            m.data[ti][tj++] = a.data[i][j];
+            }
+            n.data[i][q] = a.data[i + 1][j];
+            q++;
         }
-        ti++;
     }
-    return m;
+    double result = det_matrix(n);
+    return result;
+}
+int pow_(int a)
+{
+    int result = 1;
+    for (int i = 1; i <= a; i++)
+    {
+        result *= -1;
+    }
+    return result;
 }
 
 double det_matrix(Matrix a)
 {
+    double sum = 0.0;
     if (a.rows != a.cols)
     {
         printf("Error: The matrix must be a square matrix.\n");
         return 0;
     }
-    else if (a.rows == 1)
-        return a.data[0][0];
-    else if (a.rows == 2)
-        return a.data[0][0] * a.data[1][1] - a.data[1][0] * a.data[0][1];
     else
     {
-        int sum = 0, n = 1;
-        for (int j = 0; j < a.cols; j++)
+        if (a.rows == 1)
         {
-            int n = (j % 2 == 0) ? 1 : -1;
-            sum += n * a.data[0][j] * det_matrix(cofactor_matrix(a, 0, j));
+            return a.data[0][0];
+        }
+        else
+        {
+            for (int i = 0; i < a.rows; i++)
+            {
+                sum += pow_(i) * a.data[0][i] * algebraic_cofactor(a, i);
+            }
         }
         return sum;
     }
